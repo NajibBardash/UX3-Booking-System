@@ -3,8 +3,6 @@ import { ref } from 'vue';
 import Chip from './Chip.vue';
 import Week from './Week.vue';
 
-
-
 defineProps({
   companyName: {
     type: String,
@@ -61,13 +59,19 @@ const fourWeeks = [
 ]
 
 function activatePeriod(period) {
-  monthIsActive.value = period === 'month'
-  weekIsActive.value = period === 'week'
-  dayIsActive.value = period === 'day'
+  monthIsActive.value = period === 'month';
+  weekIsActive.value = period === 'week';
+  dayIsActive.value = period === 'day';
 
-  monthIsDisabled.value = period !== 'month'
-  weekIsDisabled.value = period !== 'week'
-  dayIsDisabled.value = period !== 'day'
+  monthIsDisabled.value = period !== 'month';
+  weekIsDisabled.value = period !== 'week';
+  dayIsDisabled.value = period !== 'day';
+}
+
+const activeWeekIndex = ref(0);
+
+function setActiveWeek(index) {
+  activeWeekIndex.value = index;
 }
 
 function handleChipClick(chip) {
@@ -109,7 +113,10 @@ function handleChipClick(chip) {
       <p>Sortera efter</p>
       <div class="chip-section">
         <div class="profession-category">
-          <Chip v-for="(chip, index) in professionChips" :key="index" :label="chip" @click="handleChipClick(chip)">
+          <Chip v-for="(chip, index) in professionChips" 
+            :key="index" 
+            :label="chip" 
+            @click="handleChipClick(chip)">
 
             <template #default="{ label }">
               <div class="profession-color" :style="{ backgroundColor: professionColors[label] || 'black' }">
@@ -142,7 +149,9 @@ function handleChipClick(chip) {
       <Week v-for="(week, index) in fourWeeks"
         :key="index"
         :month="week.month"
-        :week-number="week.weekNumber">
+        :week-number="week.weekNumber"
+        :is-active="index === activeWeekIndex"
+        @click="setActiveWeek(index)">
       </Week>
     </div>
   </div>
@@ -152,15 +161,13 @@ function handleChipClick(chip) {
 .topBar {
   background-color: rgba(139, 157, 134, 1);
   width: 100%;
-  min-width: 100%;
-  border: 1px solid red;
+  min-width: 1400px;
+  overflow: auto;
 }
 
 .calendar-section {
   display: flex;
   justify-content: space-between;
-  border: 1px solid red;
-
 }
 
 .main-header {
@@ -168,14 +175,12 @@ function handleChipClick(chip) {
   color: white;
   font-weight: bold;
   line-height: 1.1;
-  border: 1px solid red;
 }
 
 .calendarView {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid red;
 }
 
 #calendarMonth {
@@ -254,13 +259,21 @@ function handleChipClick(chip) {
   display: flex;
   justify-content: space-between;
   padding-top: .5rem;
-  border: 1px solid red;
 }
 
 .profession-category {
   display: flex;
   gap: .5rem;
-  border: 1px solid red;
+
+  .chip:hover {
+    border: 1px solid black;
+    cursor: pointer;
+  }
+
+  .chip:focus {
+    border: 1px solid black;
+    background-color: rgb(232, 229, 229);
+  }
 }
 
 .profession-color {
@@ -275,7 +288,6 @@ function handleChipClick(chip) {
 .booked-category {
   display: flex;
   gap: .5rem;
-  border: 1px solid red;
 }
 
 .striped-color {
@@ -306,7 +318,7 @@ function handleChipClick(chip) {
 .date-section {
   display: flex;
   gap: 1rem;
-  height: 150px;
+  height: 160px;
   background-color: rgba(109, 96, 88, 1);
   margin-top: 1rem;
   margin-bottom: 0;
@@ -318,13 +330,12 @@ function handleChipClick(chip) {
 }
 
 .date-options {
-  flex: .75;
+  flex: .65;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   height: 100%;
   padding-left: 1rem;
-  border: 1px solid red;
 }
 
 .month-week-wrapper {
@@ -344,7 +355,7 @@ function handleChipClick(chip) {
   display: flex;
   align-items: end;
   justify-content: left;
-  border: 1px solid red;
+  padding-bottom: .5rem;
 }
 
 </style>

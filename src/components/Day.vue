@@ -12,10 +12,15 @@ defineProps({
     }
 })
 
+function activateDay(evt) {
+    evt.currentTarget.classList.toggle('active');
+}
+
 </script>
 
 <template>
-    <div class="date-wrapper">
+    <div class="date-wrapper"
+        @click="activateDay">
         <span>{{ dayName }}</span>
         <span>{{ dayDate }}</span>
     </div>
@@ -28,7 +33,15 @@ defineProps({
     display: flex;
     flex-direction: column;
     text-align: center;
-    border: 1px solid red;
+    border-radius: 5px;
+}
+
+.date-wrapper:hover {
+    cursor: pointer;
+}
+
+.active {
+    background-color: rgba(221, 120, 58, 1);
 }
 
 </style>
