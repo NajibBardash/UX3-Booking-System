@@ -29,9 +29,6 @@ defineEmits(['click'])
         padding: .4rem 1rem;
         border-radius: 20px;
         border-style: none;
-    }
-
-    .chip:hover {
-        cursor: pointer;
+        border: 1px solid rgba(139, 157, 134, 1)
     }
 </style>

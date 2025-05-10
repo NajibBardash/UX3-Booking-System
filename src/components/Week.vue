@@ -10,8 +10,12 @@ defineProps({
     weekNumber: {
         type: String,
         required: true
-    }
+    },
+
+    isActive: Boolean
 })
+
+defineEmits(['click'])
 
 const dates = [
     {
@@ -39,7 +43,10 @@ const dates = [
 </script>
 
 <template>
-    <div class="week">
+    <div 
+        class="week"
+        :class="{ active: isActive }"
+        @click="$emit('click')">
         <div class="month-week-wrapper">
             <span>{{ month }}</span>
             <span>{{ weekNumber }}</span>
@@ -63,7 +70,7 @@ const dates = [
     height: 100%;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
-    border: 1px solid red;
+    font-weight: 600;
 
     .month-week-wrapper {
         flex: 1;
@@ -72,7 +79,6 @@ const dates = [
         flex-direction: column;
         justify-content: end;
         height: 100%;
-        border: 1px solid red;
     }
 
     .day {
@@ -81,14 +87,17 @@ const dates = [
         padding: 0 1rem;
         justify-content: end;
         align-items: end;
-
-        .date-wrapper {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-            border: 1px solid red;
-        }
+        gap: .2rem;
+        padding-bottom: .5rem;
     }
+}
+
+.week:hover {
+    cursor: pointer;
+}
+
+.week.active {
+  background-color: white;
+  color: black;
 }
 </style>
