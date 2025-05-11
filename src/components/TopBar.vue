@@ -322,7 +322,7 @@ function handleChipClick(chip) {
   background-color: rgba(109, 96, 88, 1);
   margin-top: 1rem;
   margin-bottom: 0;
-  padding: 1rem 1rem 0 0;
+  padding: 1rem 2rem 0 0;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   color: white;
@@ -356,6 +356,7 @@ function handleChipClick(chip) {
   align-items: end;
   justify-content: left;
   padding-bottom: .5rem;
+  border: 1px solid red;
 }
 
 </style>

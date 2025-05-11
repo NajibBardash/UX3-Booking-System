@@ -35,3 +35,11 @@
     width: 25px;
     height: 25px;
 }
+
+.info-icon {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    left: 140px;
+    top: 38px;
+}

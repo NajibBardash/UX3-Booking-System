@@ -71,6 +71,7 @@ const dates = [
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
     font-weight: 600;
+    border: 1px solid red;
 
     .month-week-wrapper {
         flex: 1;

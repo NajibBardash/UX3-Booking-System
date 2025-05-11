@@ -34,6 +34,7 @@ function activateDay(evt) {
     flex-direction: column;
     text-align: center;
     border-radius: 5px;
+    border: 1px solid red;
 }
 
 .date-wrapper:hover {
