@@ -2,43 +2,12 @@
 import Day from './Day.vue';
 
 defineProps({
-    month: {
-        type: String,
-        required: true,
-    },
-
-    weekNumber: {
-        type: String,
-        required: true
-    },
+    dates: Object,
 
     isActive: Boolean
 })
 
 defineEmits(['click'])
-
-const dates = [
-    {
-        dayName: 'Mån',
-        dayDate: '20/4'
-    },
-    {
-        dayName: 'Tis',
-        dayDate: '21/4'
-    },
-    {
-        dayName: 'Ons',
-        dayDate: '22/4'
-    },
-    {
-        dayName: 'Tors',
-        dayDate: '23/4'
-    },
-    {
-        dayName: 'Fre',
-        dayDate: '24/4'
-    }
-]
 
 </script>
 
@@ -48,14 +17,14 @@ const dates = [
         :class="{ active: isActive }"
         @click="$emit('click')">
         <div class="month-week-wrapper">
-            <span>{{ month }}</span>
-            <span>{{ weekNumber }}</span>
+            <span>{{ dates.month }}</span>
+            <span>{{ dates.weekNumber }}</span>
         </div>
         <div class="day">
-            <Day v-for="(date, index) in dates" 
+            <Day v-for="(dayName, index) in dates.dayNames" 
                 :key="index" 
-                :day-name="date.dayName" 
-                :day-date="date.dayDate">
+                :day-name="dayName" 
+                :day-date="dates.dayDates[index]">
             </Day>
         </div>
     </div>
@@ -71,7 +40,6 @@ const dates = [
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
     font-weight: 600;
-    border: 1px solid red;
 
     .month-week-wrapper {
         flex: 1;

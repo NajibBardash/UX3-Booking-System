@@ -9,7 +9,6 @@ defineProps({
 
 defineEmits(['click'])
 
-
 </script>
 
 <template>
@@ -29,6 +28,12 @@ defineEmits(['click'])
         padding: .4rem 1rem;
         border-radius: 20px;
         border-style: none;
-        border: 1px solid rgba(139, 157, 134, 1)
+        border: 2px solid rgb(114, 133, 109);
+
+    }
+
+    .chip.active {
+        border: 2px solid black;
+        background-color: #f0f0f0;
     }
 </style>

@@ -40,6 +40,20 @@
     position: relative;
     width: 20px;
     height: 20px;
-    left: 140px;
+    left: 165px;
     top: 38px;
+}
+
+.info-icon:hover {
+    cursor: pointer;
+}
+
+.book-icon {
+    position: relative;
+    width: 22px;
+    height: 22px;
+}
+
+.book-icon:hover {
+    cursor: pointer;
 }

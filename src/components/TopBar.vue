@@ -4,10 +4,10 @@ import Chip from './Chip.vue';
 import Week from './Week.vue';
 
 defineProps({
-  companyName: {
-    type: String,
-    required: true,
-  },
+  companyName: String,
+  dates: Object,
+  selectedProfession: String,
+  professionMap: Object
 })
 
 const monthIsActive = ref(true);
@@ -39,25 +39,6 @@ const bookedColors = {
   Ledig: 'rgba(134, 144, 131, 1)',
 }
 
-const fourWeeks = [
-  {
-    month: 'April',
-    weekNumber: 'Vecka 22'
-  },
-  {
-    month: 'April/Maj',
-    weekNumber: 'Vecka 23'
-  },
-  {
-    month: 'Maj',
-    weekNumber: 'Vecka 24'
-  },
-  {
-    month: 'Maj',
-    weekNumber: 'Vecka 25'
-  }
-]
-
 function activatePeriod(period) {
   monthIsActive.value = period === 'month';
   weekIsActive.value = period === 'week';
@@ -74,8 +55,10 @@ function setActiveWeek(index) {
   activeWeekIndex.value = index;
 }
 
-function handleChipClick(chip) {
-  return "null";
+const emit = defineEmits(['select-profession'])
+
+function handleChipClick(profession) {
+  emit('select-profession', profession)
 }
 
 </script>
@@ -115,7 +98,8 @@ function handleChipClick(chip) {
         <div class="profession-category">
           <Chip v-for="(chip, index) in professionChips" 
             :key="index" 
-            :label="chip" 
+            :label="chip"
+            :class="{ active: selectedProfession === professionMap[chip] }"
             @click="handleChipClick(chip)">
 
             <template #default="{ label }">
@@ -146,10 +130,9 @@ function handleChipClick(chip) {
         </div>
         <div class="day">Dag</div>
       </div>
-      <Week v-for="(week, index) in fourWeeks"
+      <Week v-for="(date, index) in dates"
         :key="index"
-        :month="week.month"
-        :week-number="week.weekNumber"
+        :dates="date"
         :is-active="index === activeWeekIndex"
         @click="setActiveWeek(index)">
       </Week>
@@ -159,7 +142,7 @@ function handleChipClick(chip) {
 
 <style scoped>
 .topBar {
-  background-color: rgba(139, 157, 134, 1);
+  background-color: rgb(114, 133, 109);
   width: 100%;
   min-width: 1400px;
   overflow: auto;
@@ -266,13 +249,8 @@ function handleChipClick(chip) {
   gap: .5rem;
 
   .chip:hover {
-    border: 1px solid black;
+    border: 2px solid black;
     cursor: pointer;
-  }
-
-  .chip:focus {
-    border: 1px solid black;
-    background-color: rgb(232, 229, 229);
   }
 }
 
@@ -319,7 +297,7 @@ function handleChipClick(chip) {
   display: flex;
   gap: 1rem;
   height: 160px;
-  background-color: rgba(109, 96, 88, 1);
+  background-color: rgb(80, 69, 61);
   margin-top: 1rem;
   margin-bottom: 0;
   padding: 1rem 2rem 0 0;
@@ -356,7 +334,6 @@ function handleChipClick(chip) {
   align-items: end;
   justify-content: left;
   padding-bottom: .5rem;
-  border: 1px solid red;
 }
 
 </style>

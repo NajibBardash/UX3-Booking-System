@@ -7,7 +7,7 @@
 
 body {
   min-height: 100vh;
-  background-color: rgba(139, 157, 134, 1);
+  background-color: rgb(114, 133, 109);
   transition:
     color 0.5s,
     background-color 0.5s;
