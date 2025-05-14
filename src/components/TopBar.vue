@@ -1,11 +1,11 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import Chip from './Chip.vue';
 import Week from './Week.vue';
 
-defineProps({
+const props = defineProps({
   companyName: String,
-  dates: Object,
+  dates: Array,
   selectedProfession: String,
   professionMap: Object
 })
@@ -39,7 +39,10 @@ const bookedColors = {
   Ledig: 'rgba(134, 144, 131, 1)',
 }
 
+const currentPeriod = ref('month');
+
 function activatePeriod(period) {
+  currentPeriod.value = period;
   monthIsActive.value = period === 'month';
   weekIsActive.value = period === 'week';
   dayIsActive.value = period === 'day';
@@ -55,10 +58,14 @@ function setActiveWeek(index) {
   activeWeekIndex.value = index;
 }
 
-const emit = defineEmits(['select-profession'])
+const emit = defineEmits(['select-profession', 'navigate']);
 
 function handleChipClick(profession) {
-  emit('select-profession', profession)
+  emit('select-profession', profession);
+}
+
+function handleArrowClick(direction) {
+  emit('navigate', direction, currentPeriod.value);
 }
 
 </script>
@@ -75,7 +82,7 @@ function handleChipClick(profession) {
           <option value="juni">Juni 2025</option>
         </select>
         <div class="changeDates">
-          <button class="arrow-button">
+          <button class="arrow-button" @click="handleArrowClick('backward')">
             <img src="../assets/icons/arrow-left-icon.png" alt="left arrow" class="arrow-left-icon">
           </button>
           <div class="choosePeriod poppings-regular">
@@ -86,7 +93,7 @@ function handleChipClick(profession) {
             <button :class="['period-button', { active: dayIsActive, disabled: dayIsDisabled }]"
               @click="activatePeriod('day')">Dag</button>
           </div>
-          <button class="arrow-button">
+          <button class="arrow-button" @click="handleArrowClick('forward')">
             <img src="../assets/icons/arrow-right-icon.png" alt="right arrow" class="arrow-right-icon">
           </button>
         </div>
@@ -130,12 +137,12 @@ function handleChipClick(profession) {
         </div>
         <div class="day">Dag</div>
       </div>
-      <Week v-for="(date, index) in dates"
-        :key="index"
-        :dates="date"
-        :is-active="index === activeWeekIndex"
-        @click="setActiveWeek(index)">
-      </Week>
+        <Week v-for="(date, index) in dates"
+          :key="index"
+          :dates="date"
+          :is-active="index === activeWeekIndex"
+          @click="setActiveWeek(index)">
+        </Week>
     </div>
   </div>
 </template>

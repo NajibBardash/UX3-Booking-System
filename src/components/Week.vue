@@ -3,7 +3,6 @@ import Day from './Day.vue';
 
 defineProps({
     dates: Object,
-
     isActive: Boolean
 })
 

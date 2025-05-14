@@ -4,7 +4,7 @@ import Employee from './Employee.vue';
 
 const props = defineProps({
     employee: Object,
-    dates: Object
+    dates: Array
 })
 
 const professionColors = {
@@ -25,6 +25,8 @@ function getActivityColor(activity) {
 }
 
 const groupedBookings = computed(() => {
+   if (!props.dates) return [];
+
   return props.dates.map((week) => {
     const groups = []
     let currentGroup = []

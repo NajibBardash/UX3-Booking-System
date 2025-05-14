@@ -19,35 +19,74 @@ async function getBookings() {
 }
 
 onMounted(() => {
-  getBookings()
+  getBookings();
 })
 
-const fourWeeks = ref([
-  {
-    month: 'April',
-    weekNumber: 'Vecka 25',
-    dayNames: ['Mån', 'Tis', 'Ons', 'Tors', 'Fre'],
-    dayDates: ['12/5', '13/5', '14/5', '15/5', '16/5']
-  },
-  {
-    month: 'April/Maj',
-    weekNumber: 'Vecka 26',
-    dayNames: ['Mån', 'Tis', 'Ons', 'Tors', 'Fre'],
-    dayDates: ['19/5', '20/5', '21/5', '22/5', '23/5']
-  },
-  {
-    month: 'Maj',
-    weekNumber: 'Vecka 27',
-    dayNames: ['Mån', 'Tis', 'Ons', 'Tors', 'Fre'],
-    dayDates: ['26/5', '27/5', '28/5', '29/5', '30/5']
-  },
-  {
-    month: 'Maj',
-    weekNumber: 'Vecka 28',
-    dayNames: ['Mån', 'Tis', 'Ons', 'Tors', 'Fre'],
-    dayDates: ['2/6', '3/6', '4/6', '5/6', '6/6']
+function generateWeeksFromOffset(offsetInDays = 0) {
+  const today = new Date();
+
+  // Gå till måndag den här veckan
+  const dayOfWeek = (today.getDay() + 6) % 7;
+  const baseDate = new Date(today);
+  baseDate.setDate(today.getDate() - dayOfWeek + offsetInDays);
+
+  const weeks = [];
+  const dayNames = ['Mån', 'Tis', 'Ons', 'Tors', 'Fre'];
+
+  for (let i = 0; i < 4; i++) {
+    const weekStart = new Date(baseDate);
+    weekStart.setDate(baseDate.getDate() + i * 7);
+
+    const dayDates = [];
+    for (let d = 0; d < 5; d++) {
+      const day = new Date(weekStart);
+      day.setDate(weekStart.getDate() + d);
+      dayDates.push(day.toLocaleDateString('sv-SE', { day: '2-digit', month: 'numeric' }));
+    }
+    
+    const weekNumber = getWeekNumber(weekStart);
+    const monthName = getMonthName(weekStart);
+
+    weeks.push({
+      month: monthName,
+      weekNumber: `Vecka ${weekNumber}`,
+      dayNames,
+      dayDates
+    });
   }
-])
+
+  return weeks;
+}
+
+
+function getWeekNumber(date) {
+  const target = new Date(date.valueOf())
+  const dayNr = (date.getDay() + 6) % 7
+  target.setDate(target.getDate() - dayNr + 3)
+  const firstThursday = new Date(target.getFullYear(), 0, 4)
+  const diff = target - firstThursday
+  return 1 + Math.round(diff / (7 * 24 * 60 * 60 * 1000))
+}
+
+function getMonthName(date) {
+  return date.toLocaleDateString('sv-SE', { month: 'long' }).charAt(0).toUpperCase() +
+         date.toLocaleDateString('sv-SE', { month: 'long' }).slice(1)
+}
+
+const currentOffset = ref(0);
+const fourWeeks = ref([]);
+
+onMounted(() => {
+  fourWeeks.value = generateWeeksFromOffset(currentOffset.value);
+});
+
+
+function navigate(direction, viewMode) {
+  const days = viewMode === 'month' ? 28 : 7;
+  currentOffset.value += direction === 'forward' ? days : -days;
+  fourWeeks.value = generateWeeksFromOffset(currentOffset.value);
+}
+
 
 const selectedProfession = ref(null);
 
@@ -69,18 +108,20 @@ function handleProfessionFilter(swedishLabel) {
   }
 }
 
+
 </script>
 
 <template>
   <header>
 
     <div class="wrapper">
-      <TopBar 
+      <TopBar
         companyName="Svenssons Hantverk AB" 
         :dates="fourWeeks"
         :selectedProfession="selectedProfession"
         :professionMap="professionMap"
         @select-profession="handleProfessionFilter"
+        @navigate="navigate"
       />
     </div>
 
