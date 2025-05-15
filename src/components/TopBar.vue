@@ -78,7 +78,7 @@ function handleArrowClick(direction) {
         <img src="../assets/icons/arrow-down-icon.png" alt="down arrow" class="arrow-down-icon">
         <select name="month" id="calendarMonth">
           <option value="april">April 2025</option>
-          <option value="maj">Maj 2025</option>
+          <option value="maj" selected>Maj 2025</option>
           <option value="juni">Juni 2025</option>
         </select>
         <div class="changeDates">
@@ -158,6 +158,8 @@ function handleArrowClick(direction) {
 .calendar-section {
   display: flex;
   justify-content: space-between;
+  min-width: 1400px;
+  overflow: auto;
 }
 
 .main-header {
@@ -312,6 +314,8 @@ function handleArrowClick(direction) {
   border-top-right-radius: 20px;
   color: white;
   font-weight: 500;
+  min-width: 1400px;
+  overflow: auto;
 }
 
 .date-options {
@@ -320,6 +324,8 @@ function handleArrowClick(direction) {
   justify-content: space-between;
   flex-direction: column;
   height: 100%;
+  min-width: 225px;
+  max-width: 225px;
   padding-left: 1rem;
 }
 

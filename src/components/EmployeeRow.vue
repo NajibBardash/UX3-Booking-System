@@ -28,45 +28,45 @@ const groupedBookings = computed(() => {
    if (!props.dates) return [];
 
   return props.dates.map((week) => {
-    const groups = []
-    let currentGroup = []
+    const groups = [];
+    let currentGroup = [];
 
     week.dayDates.forEach((dayStr, index) => {
-      const [dayNum, monthNum] = dayStr.split('/').map(Number)
-      const date = new Date(2025, monthNum - 1, dayNum + 1)
+      const [dayNum, monthNum] = dayStr.split('/').map(Number);
+      const date = new Date(2025, monthNum - 1, dayNum + 1);
 
       const booking = props.employee.bookings.find(b => {
-        const from = new Date(b.from)
-        const to = new Date(b.to)
-        return date >= from && date <= to
+        const from = new Date(b.from);
+        const to = new Date(b.to);
+        return date >= from && date <= to;
       })
 
-      const key = booking ? `${booking.status}-${booking.percentage}` : 'null'
+      const key = booking ? `${booking.status}-${booking.percentage}` : 'null';
 
       if (key === 'null') {
         if (currentGroup.length) {
-          groups.push({ key: currentGroup[0].key, days: [...currentGroup] })
-          currentGroup = []
+          groups.push({ key: currentGroup[0].key, days: [...currentGroup] });
+          currentGroup = [];
         }
 
-        groups.push({ key: 'null', days: [{ booking: null, date, label: dayStr, key }] })
+        groups.push({ key: 'null', days: [{ booking: null, date, label: dayStr, key }] });
       } else {
-        const prevKey = currentGroup.length ? currentGroup[0].key : null
+        const prevKey = currentGroup.length ? currentGroup[0].key : null;
 
         if (key !== prevKey && currentGroup.length) {
-          groups.push({ key: prevKey, days: [...currentGroup] })
-          currentGroup = []
+          groups.push({ key: prevKey, days: [...currentGroup] });
+          currentGroup = [];
         }
 
-        currentGroup.push({ booking, date, label: dayStr, key })
+        currentGroup.push({ booking, date, label: dayStr, key });
       }
     })
 
     if (currentGroup.length) {
-      groups.push({ key: currentGroup[0].key, days: [...currentGroup] })
+      groups.push({ key: currentGroup[0].key, days: [...currentGroup] });
     }
 
-    return groups
+    return groups;
   })
 })
 
@@ -170,6 +170,7 @@ function getMessage(group) {
   display: flex;
   justify-content: space-between;
   background-color: white;
+  max-width: 400px;
 }
 
 .booking-group {

@@ -25,7 +25,7 @@ onMounted(() => {
 function generateWeeksFromOffset(offsetInDays = 0) {
   const today = new Date();
 
-  // Gå till måndag den här veckan
+  // Gå to Monday of current month
   const dayOfWeek = (today.getDay() + 6) % 7;
   const baseDate = new Date(today);
   baseDate.setDate(today.getDate() - dayOfWeek + offsetInDays);
@@ -58,7 +58,6 @@ function generateWeeksFromOffset(offsetInDays = 0) {
   return weeks;
 }
 
-
 function getWeekNumber(date) {
   const target = new Date(date.valueOf())
   const dayNr = (date.getDay() + 6) % 7
@@ -87,7 +86,6 @@ function navigate(direction, viewMode) {
   fourWeeks.value = generateWeeksFromOffset(currentOffset.value);
 }
 
-
 const selectedProfession = ref(null);
 
 const professionMap = {
@@ -107,7 +105,6 @@ function handleProfessionFilter(swedishLabel) {
     selectedProfession.value = english;
   }
 }
-
 
 </script>
 
@@ -142,7 +139,6 @@ function handleProfessionFilter(swedishLabel) {
         :dates="fourWeeks"
         v-show="!selectedProfession || employee.professions.includes(selectedProfession)"
       />
-
     </div>
     
     <div class="end-color"></div>
@@ -176,6 +172,8 @@ main {
 
 .booking-view {
   background-color: white;
+  min-width: 1400px;
+  overflow: auto;
   padding: 11rem 2rem 2rem 1rem ;
 
   h4 {
