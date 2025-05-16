@@ -12,6 +12,7 @@ defineProps({
     }
 })
 
+// Activates a day (changes color) by clicking on it
 function activateDay(evt) {
     evt.currentTarget.classList.toggle('active');
 }

@@ -3,7 +3,7 @@
 @import './icons.css';
 
 #app {
-  min-width: 1400px;
+  min-width: 1250px;
   margin: 0 auto;
   overflow: auto;
 }

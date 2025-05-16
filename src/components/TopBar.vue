@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 import Chip from './Chip.vue';
 import Week from './Week.vue';
 
@@ -41,6 +41,7 @@ const bookedColors = {
 
 const currentPeriod = ref('month');
 
+// User can choose to jump in the calendar by first activating which time-span to jump. Month as default
 function activatePeriod(period) {
   currentPeriod.value = period;
   monthIsActive.value = period === 'month';
@@ -54,6 +55,7 @@ function activatePeriod(period) {
 
 const activeWeekIndex = ref(0);
 
+// Sets which week is active by clicking on it (renders as a "tab")
 function setActiveWeek(index) {
   activeWeekIndex.value = index;
 }
@@ -75,12 +77,14 @@ function handleArrowClick(direction) {
     <div class="calendar-section">
       <h1 class="main-header">{{ companyName }}</h1>
       <div class="calendarView">
-        <img src="../assets/icons/arrow-down-icon.png" alt="down arrow" class="arrow-down-icon">
-        <select name="month" id="calendarMonth">
-          <option value="april">April 2025</option>
-          <option value="maj" selected>Maj 2025</option>
-          <option value="juni">Juni 2025</option>
-        </select>
+        <div class="select-wrapper">
+          <select name="month" id="calendarMonth">
+            <option value="april">April 2025</option>
+            <option value="maj" selected>Maj 2025</option>
+            <option value="juni">Juni 2025</option>
+          </select>
+          <img src="../assets/icons/arrow-down-icon.png" alt="down arrow" class="arrow-down-icon">
+        </div>
         <div class="changeDates">
           <button class="arrow-button" @click="handleArrowClick('backward')">
             <img src="../assets/icons/arrow-left-icon.png" alt="left arrow" class="arrow-left-icon">
@@ -151,14 +155,14 @@ function handleArrowClick(direction) {
 .topBar {
   background-color: rgb(114, 133, 109);
   width: 100%;
-  min-width: 1400px;
+  min-width: 1220px;
   overflow: auto;
 }
 
 .calendar-section {
   display: flex;
   justify-content: space-between;
-  min-width: 1400px;
+  min-width: 1220px;
   overflow: auto;
 }
 
@@ -173,6 +177,11 @@ function handleArrowClick(direction) {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.select-wrapper {
+  position: relative;
+  display: inline-block;
 }
 
 #calendarMonth {
@@ -314,7 +323,7 @@ function handleArrowClick(direction) {
   border-top-right-radius: 20px;
   color: white;
   font-weight: 500;
-  min-width: 1400px;
+  min-width: 1200px;
   overflow: auto;
 }
 

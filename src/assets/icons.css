@@ -1,9 +1,11 @@
 .arrow-down-icon {
-    position: absolute;
-    height: 10px;
-    width: 12px;
-    top: 46px;
-    right: 110px;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  width: 12px;
+  height: 10px;
 }
 
 .arrow-left-icon {
@@ -56,4 +58,12 @@
 
 .book-icon:hover {
     cursor: pointer;
+}
+
+.scroll-icon-up {
+    width: 16px;
+}
+
+.scroll-icon-down {
+    width: 16px;
 }

@@ -1,6 +1,5 @@
 <script setup>
-import { ref } from 'vue';
-import { computed } from 'vue';
+import { ref, computed } from 'vue';
 import infoIcon from '../assets/icons/info-icon.png';
 import activeInfoIcon from '../assets/icons/active-info-icon.png';
 
@@ -35,6 +34,7 @@ function toggleTooltip() {
   tooltipVisible.value = !tooltipVisible.value;
 }
 
+// Replaces certain characters in the email.
 function normalize(str) {
   return str
     .toLowerCase()
