@@ -29,12 +29,13 @@ const professionColors = {
   Snickare: 'rgba(180, 114, 190, 1)',
 }
 
-const bookedChips = ['50 %', '100 %', 'Prel. bokad', 'Tillgänglig', 'Ledig'];
+const bookedChips = ['50 %', '100 %', 'Prel. 50 %', 'Prel. 100 %', 'Tillgänglig', 'Ledig'];
 
 const bookedColors = {
   '50 %': 'rgba(212, 232, 111, 1)',
   '100 %': 'rgba(212, 232, 111, 1)',
-  'Prel. bokad': 'rgba(217, 217, 217, 1)',
+  'Prel. 50 %': 'rgba(217, 217, 217, 1)',
+  'Prel. 100 %': 'rgba(217, 217, 217, 1)',
   Tillgänglig: 'rgba(172, 197, 165, 1)',
   Ledig: 'rgba(134, 144, 131, 1)',
 }
@@ -124,7 +125,9 @@ function handleArrowClick(direction) {
           <Chip v-for="(chip, index) in bookedChips" :key="index" :label="chip" @click="handleChipClick(chip)">
 
             <template #default="{ label }">
-              <div :class="[label === '50 %' ? 'striped-color' : 'booked-color']"
+              <div :class="[(label === '50 %' ? 'striped-color-booked' : 'booked-color'),
+                            (label === 'Prel. 50 %' ? 'striped-color-prel' : 'booked-color')
+               ]"
                 :style="{ backgroundColor: bookedColors[label] || 'black' }">
               </div>
               <span>{{ label }}</span>
@@ -293,7 +296,7 @@ function handleArrowClick(direction) {
   gap: .5rem;
 }
 
-.striped-color {
+.striped-color-booked {
   position: relative;
   width: 16px;
   height: 16px;
@@ -303,6 +306,22 @@ function handleArrowClick(direction) {
   background-image: repeating-linear-gradient(90deg,
       rgba(212, 232, 111, 1),
       rgba(212, 232, 111, 1) 2px,
+      white 2px,
+      white 4.5px);
+  display: block;
+  flex: 0 0 16px;
+}
+
+.striped-color-prel {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  top: 1.5px;
+  left: -7px;
+  border-radius: 3px;
+  background-image: repeating-linear-gradient(90deg,
+      rgba(217, 217, 217, 1),
+      rgba(217, 217, 217, 1) 2px,
       white 2px,
       white 4.5px);
   display: block;

@@ -29,7 +29,6 @@ defineEmits(['click'])
         border-radius: 20px;
         border-style: none;
         border: 2px solid rgb(114, 133, 109);
-
     }
 
     .chip.active {
