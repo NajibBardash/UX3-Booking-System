@@ -141,12 +141,19 @@ function handleArrowClick(direction) {
         </div>
         <div class="day">Dag</div>
       </div>
-        <Week v-for="(date, index) in dates"
-          :key="index"
+      <div class="white-post"
+        :class="{ invisible: activeWeekIndex === 0 }">
+      </div>
+      <template v-for="(date, index) in dates" :key="index">
+        <Week
           :dates="date"
           :is-active="index === activeWeekIndex"
-          @click="setActiveWeek(index)">
-        </Week>
+          @click="setActiveWeek(index)"
+        />
+        <div class="white-post"
+          :class="{ invisible: index === activeWeekIndex || index + 1 === activeWeekIndex }">
+        </div>
+      </template>
     </div>
   </div>
 </template>
@@ -313,12 +320,12 @@ function handleArrowClick(direction) {
 
 .date-section {
   display: flex;
-  gap: 1rem;
+  gap: 0rem;
   height: 160px;
   background-color: rgb(80, 69, 61);
   margin-top: 1rem;
   margin-bottom: 0;
-  padding: 1rem 2rem 0 0;
+  padding: 1rem 1rem 0 0;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   color: white;
@@ -336,6 +343,19 @@ function handleArrowClick(direction) {
   min-width: 225px;
   max-width: 225px;
   padding-left: 1rem;
+  padding-right: 12rem;
+}
+
+.white-post {
+    position: relative;
+    background-color: white;
+    width: 1rem;
+    height: 1rem;
+    top: 130px;
+}
+
+.white-post.invisible {
+  visibility: hidden;
 }
 
 .month-week-wrapper {
