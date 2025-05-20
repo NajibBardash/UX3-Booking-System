@@ -64,6 +64,7 @@ function handleProfessionFilter(swedishLabel) {
   }
 }
 
+// Updates the scroll-thumbs position in the scrollbar.
 function onScroll() {
   const element = scrollArea.value;
   if (!element) return;
@@ -184,12 +185,16 @@ function navigate(direction, viewMode) {
       
       <div class="end-color"></div>
     </main>
-    <div class="custom-scrollbar" :style="{ top: scrollbarTop + 'px', height: scrollbarHeight + 'px' }">
-      <div class="scroll-arrow-up" :style="{ height: arrowHeight + 'px' }">
+    <div class="custom-scrollbar" 
+      :style="{ top: scrollbarTop + 'px', height: scrollbarHeight + 'px' }">
+      <div class="scroll-arrow-up" 
+        :style="{ height: arrowHeight + 'px' }">
         <img src="./assets/icons/scroll-up.png" alt="scroll-up" class="scroll-icon-up">
       </div>
-      <div class="scroll-thumb" :style="{ top: thumbTop + 'px', height: thumbHeight + 'px' }"></div>
-      <div class="scroll-arrow-down" :style="{ height: arrowHeight + 'px' }">
+      <div class="scroll-thumb" 
+        :style="{ top: thumbTop + 'px', height: thumbHeight + 'px' }"></div>
+      <div class="scroll-arrow-down" 
+        :style="{ height: arrowHeight + 'px' }">
         <img src="./assets/icons/scroll-down.png" alt="scroll-up" class="scroll-icon-down">
       </div>
     </div>
