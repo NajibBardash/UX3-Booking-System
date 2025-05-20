@@ -106,7 +106,7 @@ function generateWeeksFromOffset(offsetInDays = 0) { // Offset is 0 as default i
     for (let d = 0; d < 5; d++) { // Iterates 5 times for the days of the regular work week
       const day = new Date(weekStart); // Begin at the start of the current week in the week-loop 
       day.setDate(weekStart.getDate() + d); // Increments by 1
-      dayDates.push(day.toLocaleDateString('sv-SE', { day: '2-digit', month: 'numeric' })); // Adds the date to the array in Swedish with the day-number first and then month (13/5)
+      dayDates.push(day.toLocaleDateString('sv-SE', { day: '2-digit', month: 'numeric' })); // Adds the date to the array in Swedish with the day-number first and then month ( e.g. 13/5)
     }
     
     const weekNumber = getWeekNumber(weekStart);
@@ -224,7 +224,7 @@ main {
 
 .booking-view {
   background-color: white;
-  min-width: 1220px;
+  min-width: 1300px;
   overflow: auto;
   padding: 11rem 2rem 2rem 1rem ;
 

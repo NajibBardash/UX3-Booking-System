@@ -165,7 +165,7 @@ function handleArrowClick(direction) {
 .topBar {
   background-color: rgb(114, 133, 109);
   width: 100%;
-  min-width: 1220px;
+  min-width: 1300px;
   overflow: auto;
 }
 
@@ -359,8 +359,8 @@ function handleArrowClick(direction) {
   justify-content: space-between;
   flex-direction: column;
   height: 100%;
-  min-width: 225px;
-  max-width: 225px;
+  min-width: 226px;
+  max-width: 226px;
   padding-left: 1rem;
   padding-right: 12rem;
 }
