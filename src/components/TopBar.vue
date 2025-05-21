@@ -79,7 +79,7 @@ function handleArrowClick(direction) {
       <h1 class="main-header">{{ companyName }}</h1>
       <div class="calendarView">
         <div class="select-wrapper">
-          <select name="month" id="calendarMonth">
+          <select name="month" aria-label="Välj månad" id="calendarMonth">
             <option value="april">April 2025</option>
             <option value="maj" selected>Maj 2025</option>
             <option value="juni">Juni 2025</option>
@@ -87,7 +87,7 @@ function handleArrowClick(direction) {
           <img src="../assets/icons/arrow-down-icon.png" alt="down arrow" class="arrow-down-icon">
         </div>
         <div class="changeDates">
-          <button class="arrow-button" @click="handleArrowClick('backward')">
+          <button class="arrow-button" @click="handleArrowClick('backward')" aria-label="Hoppa bakåt">
             <img src="../assets/icons/arrow-left-icon.png" alt="left arrow" class="arrow-left-icon">
           </button>
           <div class="choosePeriod poppings-regular">
@@ -98,7 +98,7 @@ function handleArrowClick(direction) {
             <button :class="['period-button', { active: dayIsActive, disabled: dayIsDisabled }]"
               @click="activatePeriod('day')">Dag</button>
           </div>
-          <button class="arrow-button" @click="handleArrowClick('forward')">
+          <button class="arrow-button" @click="handleArrowClick('forward')" aria-label="Hoppa framåt">
             <img src="../assets/icons/arrow-right-icon.png" alt="right arrow" class="arrow-right-icon">
           </button>
         </div>

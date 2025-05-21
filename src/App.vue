@@ -172,7 +172,7 @@ function navigate(direction, viewMode) {
       </div>
 
       <div class="booking-view">
-        <h4>Anställda</h4>
+        <h2>Anställda</h2>
         <EmployeeRow
           v-for="(employee, index) in employeeBookings"
           :key="index"
@@ -233,8 +233,9 @@ main {
   overflow: auto;
   padding: 11rem 2rem 2rem 1rem ;
 
-  h4 {
+  h2 {
     padding-bottom: .5rem;
+    font-size: 90%;
   }
 }
 
